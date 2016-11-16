@@ -1,0 +1,70 @@
+2 way, 1 way And 1 time binding
+	index.html
+===============================
+<!DOCTYPE html>
+<html ng-App='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+      body
+      {
+          font-size: 1.3em;
+      }
+    </style>
+    <title> 2 way, 1 way And 1 time binding </title>
+  </head>
+  <body>
+    <h1> 2 way, 1 way And 1 time binding </h1>
+    <div ng-controller='myController'>
+        <button ng-click="showNumberOfWatchers()">Log # Of Watchers</button> <br>
+        <button ng-click="setFullName()">Set Full Name</button> <br>
+
+        Full Name is : {{ :: fullName }} <br>
+
+        <button ng-click="logFirstName()">Log First Name</button> <br>
+        <button ng-click="logFullName()">Log Full Name</button> <br>
+        <div>
+          <input type="text" ng-model="firstName">
+        </div>
+    </div>
+  </body>
+</html>
+
+
+app.js
+======
+(function () {
+  'use strict';
+
+  angular.module('myApp', [])
+
+  .controller('myController', myController);
+
+  myController.$inject = ['$scope'];
+
+  function myController ($scope) {
+    $scope.firstName = "Aman";
+  //  $scope.fullName = "";
+
+    $scope.showNumberOfWatchers = function () {
+      console.log("# of watchers:", $scope.$$watchersCount);
+    };
+
+    $scope.setFullName = function () {
+      $scope.fullName = $scope.firstName + " " + "Kedia";
+    };
+
+    $scope.logFirstName = function () {
+      console.log("First Name is: ", $scope.firstName);
+    };
+
+    $scope.logFullName = function () {
+      console.log("Full Name is: ", $scope.fullName);
+    };
+
+  }
+
+
+})();

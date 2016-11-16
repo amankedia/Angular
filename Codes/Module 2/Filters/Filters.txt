@@ -1,0 +1,58 @@
+Filters
+index.html
+==========
+<!DOCTYPE html>
+<html ng-App='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+      body
+      {
+          font-size: 1.3em;
+      }
+    </style>
+    <title> Filters </title>
+  </head>
+  <body>
+    <h1> Filters </h1>
+    <div ng-controller='myController'>
+      {{name}} has a message for you: <br>
+      {{sayMessage()}}
+      <div>
+        <button ng-click="feedAman()">Feed Aman</button>
+        Cost : {{cookieCost | currency : "@" : 4}}
+        <br>
+        <img ng-src = "images/aman_{{stateOfBeing}}.jpg">
+      </div>
+      <input type = "text" ng-model = "name" ng-blur="upper();">
+    </div>
+  </body>
+</html>
+
+app.js
+======
+(function () {
+  'use strict';
+
+  angular.module('myApp', [])
+
+  .controller('myController', myController);
+
+  myController.$inject = ['$scope', '$filter'];
+  function myController ($scope,$filter) {
+    $scope.name = "Aman";
+    $scope.stateOfBeing = "hungry";
+    $scope.cookieCost = 0.45;
+
+    $scope.feedAman = function () {
+      $scope.stateOfBeing = "fed";
+    };
+    $scope.sayMessage = function () {
+      var msg= "Aman likes to eat";
+      var output = $filter('uppercase')(msg);
+      return output;
+    };
+  }
+})();

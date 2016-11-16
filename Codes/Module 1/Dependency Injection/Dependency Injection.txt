@@ -1,0 +1,44 @@
+Dependency Injection
+    index.html
+====================
+<!DOCTYPE html>
+<html ng-App='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+      body
+      {
+          font-size: 1.3em;
+      }
+    </style>
+    <title> Dependency Injection in Javascript & AngularJS </title>
+  </head>
+  <body>
+    <h1> Dependency Injection in Javascript & AngularJS </h1>
+
+    <div ng-controller='myController'>
+      <input type = "text" ng-model = "name" ng-blur="upper();">
+    </div>
+  </body>
+</html>
+
+app.js
+======
+(function () {
+  'use strict';
+
+  angular.module('myApp', [])
+
+  .controller('myController', myController);
+
+  function myController ($scope, $filter) {
+    $scope.name = "Aman";
+
+    $scope.upper = function () {
+      var upCase = $filter('uppercase');
+      $scope.name = upCase($scope.name);
+    };
+  }
+})();

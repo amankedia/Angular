@@ -1,0 +1,74 @@
+Digest, Apply & Timeout
+      index.html
+=======================
+<!DOCTYPE html>
+<html ng-App='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+      body
+      {
+          font-size: 1.3em;
+      }
+    </style>
+    <title> Digest Cycle </title>
+  </head>
+  <body>
+    <h1> Digest Cycle </h1>
+    <div ng-controller='myController'>
+      <div>
+        <button ng-click="upCounter()">Increment By One</button>
+      </div>
+      <div>
+        Regular Counter : {{ counter }}
+      </div>
+    </div>
+  </body>
+</html>
+
+app.js
+======
+(function () {
+  'use strict';
+
+  angular.module('myApp', [])
+
+  .controller('myController', myController);
+
+  myController.$inject = ['$scope', '$timeout'];
+
+  function myController ($scope, $timeout) {
+    $scope.counter = 0;
+
+//Way 3
+    $scope.upCounter = function () {
+          $timeout(function () {
+            $scope.counter++;
+            console.log("Counter Incremented");
+          }, 2000);
+   };
+
+//Way 2
+  /*  $scope.upCounter = function () {
+          setTimeout( function () {
+          $scope.$apply( function () {
+            $scope.counter++;
+            console.log("Counter Incremented");
+          });
+      }, 2000);
+   };*/
+//Way 1
+  /*  $scope.upCounter = function () {
+      setTimeout( function () {
+        $scope.counter++;
+        console.log("Counter Incremented");
+        $scope.$digest();
+      }, 2000);
+    };*/
+
+  }
+
+
+})();
