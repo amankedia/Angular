@@ -1,42 +1,33 @@
-(function(){
+(function () {
   'use strict';
 
   angular.module('myApp', [])
 
-  .controller('myController', function ($scope) {
-  /*  $scope.name = "Aman";
-    $scope.sayHello = function () {
-      return "Hello Corsera!"; */
-      $scope.name = "";
-      $scope.totalCount = 0;
-      $scope.Message = "";
+  .controller('myController', myController);
 
-      $scope.lunchCheckController = function () {
-        if($scope.name == "")
-          $scope.Message = "Please Enter Data First";
-        else {
-          var totalNameValue = splitString($scope.name, ',') ;
-          $scope.totalCount = totalNameValue;
-          if (totalNameValue > 3)
-            $scope.Message = "Too Much";
-          else
-            $scope.Message = "Enjoy!";
-          }
-        };
+  myController.$inject = ['$scope'];
 
-      function splitString(stringToSplit, separator) {
-          var arrayOfStrings = stringToSplit.split(separator);
-          //console.log('The original string is: "' + stringToSplit + '"');
-          //console.log('The separator is: "' + separator + '"');
-          var stringLength = arrayOfStrings.length;
-          var count = stringLength;
-          for( var i = 0; i< stringLength; i++)
-          {
-            if (!arrayOfStrings[i].replace(/\s/g, '').length)
-                count--;
-          }
-        //  console.log('The array has ' + count + ' elements: ' + arrayOfStrings.join(' / '));
-          return count;
-      }
-  });
+  function myController ($scope) {
+    $scope.firstName = "Aman";
+  //  $scope.fullName = "";
+
+    $scope.showNumberOfWatchers = function () {
+      console.log("# of watchers:", $scope.$$watchersCount);
+    };
+
+    $scope.setFullName = function () {
+      $scope.fullName = $scope.firstName + " " + "Kedia";
+    };
+
+    $scope.logFirstName = function () {
+      console.log("First Name is: ", $scope.firstName);
+    };
+
+    $scope.logFullName = function () {
+      console.log("Full Name is: ", $scope.fullName);
+    };
+
+  }
+
+
 })();
