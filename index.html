@@ -16,24 +16,14 @@
     <h1> Looping using Ng-Repeat </h1>
     <div ng-controller='myController'>
       <h3>Shopping List:</h3>
-      <!-- ShoppingList1
+      Execute your search
+      <input type = "text" ng-model = "search">
+      <br>
+      <br>
+      ShoppingList1
       <ul>
-        <li ng-repeat="item in shoppingList1">{{ item }}</li>
+        <li ng-repeat="item in shoppingList1 | filter : search">{{ item }}</li>
       </ul>
-    -->
-    <!-- shoppingList2
-      <ul>
-        <li ng-repeat="item in shoppingList2">Buy {{item.quantity}} of {{item.name}}(s)</li>
-      </ul>
-      -->
-    <!-- ShoppingList3 -->
-      <input type="text" ng-model="shoppingList2[0].quantity">
-      <ul>
-        <li ng-repeat="item in shoppingList2">{{$index + 1}}. Buy {{item.quantity}} of {{item.name}}(s)</li>
-      </ul>
-      <input type="text" ng-model="newItemName" placeholder="Item name">
-      <input type="text" ng-model="newItemQuantity" placeholder="Item quantity">
-      <button ng-click="addToList()">Add To List</button>
     </div>
   </body>
 </html>
